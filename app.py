@@ -7,5 +7,5 @@ def hello_world():
     return "¡Hola Mundo desde Flask en Render y Docker, Dalbert Sanchez 2023-0213!"
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))  # Usa el puerto de la variable de entorno
+    port = int(os.environ.get('PORT', 10000))  
     app.run(host='0.0.0.0', port=port)
