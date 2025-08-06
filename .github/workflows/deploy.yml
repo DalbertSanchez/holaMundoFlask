@@ -14,7 +14,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up variables
-        id: vars
         run: |
           echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
@@ -27,15 +26,15 @@ jobs:
 
       - name: Build Docker image with tags
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/miapp:latest \
-                       -t ${{ secrets.DOCKER_USERNAME }}/miapp:${{ env.SHA_SHORT }} \
-                       -t ${{ secrets.DOCKER_USERNAME }}/miapp:${{ env.DATE }} .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/miapp:latest \
+                       -t ${{ secrets.DOCKERHUB_USERNAME }}/miapp:${{ env.SHA_SHORT }} \
+                       -t ${{ secrets.DOCKERHUB_USERNAME }}/miapp:${{ env.DATE }} .
 
       - name: Push Docker images
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/miapp:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/miapp:${{ env.SHA_SHORT }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/miapp:${{ env.DATE }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/miapp:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/miapp:${{ env.SHA_SHORT }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/miapp:${{ env.DATE }}
 
       - name: Trigger Render deploy
         run: |
